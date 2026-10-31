@@ -1,0 +1,11 @@
+<Project>
+  <!-- Φέρε όλους τους κανόνες του root, γιατί το MSBuild διαβάζει μόνο το πλησιέστερο αρχείο -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+  <PropertyGroup>
+    <!-- Τα test projects δεν πακετάρονται ποτέ ως NuGet -->
+    <IsPackable>false</IsPackable>
+    <!-- CA1707: επιτρέπουμε underscores σε ονόματα όπως Booking_Fails_When_Court_Is_Taken -->
+    <NoWarn>$(NoWarn);CA1707</NoWarn>
+  </PropertyGroup>
+</Project>
