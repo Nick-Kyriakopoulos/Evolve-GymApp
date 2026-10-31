@@ -2,7 +2,12 @@
   <PropertyGroup>
     <!-- Enable central package management, https://learn.microsoft.com/en-us/nuget/consume-packages/Central-Package-Management -->
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Οι εκδόσεις που δηλώνονται εδώ ισχύουν και για transitive packages (ADR 0005) -->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
+
   <ItemGroup>
+    <!-- Οι εκδόσεις μπαίνουν εδώ όταν τις χρειαστεί το πρώτο project.
+         Κανόνας: exact εκδόσεις, κάθε transitive pin με σχόλιο που λέει γιατί. -->
   </ItemGroup>
 </Project>
