@@ -1,0 +1,25 @@
+# Line endings: στο repo όλα τα text αρχεία αποθηκεύονται με LF.
+# Στον δίσκο το Git τα δίνει με τις αλλαγές γραμμής του λειτουργικού (CRLF σε Windows).
+# Έτσι η συμπεριφορά δεν εξαρτάται από το core.autocrlf κάθε μηχανήματος.
+* text=auto
+
+# Αρχεία που τρέχουν σε Linux (containers, CI): πάντα LF, και στον δίσκο
+*.sh        text eol=lf
+Dockerfile  text eol=lf
+*.Dockerfile text eol=lf
+
+# Windows scripts: πάντα CRLF
+*.cmd       text eol=crlf
+*.bat       text eol=crlf
+
+# Binary: ποτέ μετατροπή ή diff κειμένου
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.pptx  binary
+*.docx  binary
+*.xlsx  binary
+*.zip   binary
