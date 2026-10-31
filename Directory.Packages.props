@@ -4,6 +4,8 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <!-- Οι εκδόσεις που δηλώνονται εδώ ισχύουν και για transitive packages (ADR 0005) -->
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <!-- Ένα project δεν μπορεί να παρακάμψει την κεντρική έκδοση με VersionOverride (ADR 0005) -->
+    <CentralPackageVersionOverrideEnabled>false</CentralPackageVersionOverrideEnabled>
   </PropertyGroup>
 
   <ItemGroup>
