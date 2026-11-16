@@ -11,6 +11,7 @@
   </Folder>
   <Folder Name="/platform/">
     <Project Path="platform/Evolve.AppHost/Evolve.AppHost.csproj" />
+    <Project Path="platform/Evolve.ServiceDefaults/Evolve.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/services/" />
   <Folder Name="/services/Members/">
