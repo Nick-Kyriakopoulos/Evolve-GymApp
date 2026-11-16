@@ -1,0 +1,10 @@
+<Project Sdk="Aspire.AppHost.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <AspireCliInvocationMode>DnxPinned</AspireCliInvocationMode>
+    <UserSecretsId>ccd9bb33-bfe7-446e-b46c-615468d40829</UserSecretsId>
+  </PropertyGroup>
+
+</Project>
