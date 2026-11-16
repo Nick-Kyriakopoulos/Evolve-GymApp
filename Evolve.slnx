@@ -15,6 +15,7 @@
   </Folder>
   <Folder Name="/services/" />
   <Folder Name="/services/Members/">
+    <Project Path="services/Members/Evolve.Members.Api/Evolve.Members.Api.csproj" />
     <Project Path="services/Members/Evolve.Members.Domain/Evolve.Members.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/" />
