@@ -1,13 +1,13 @@
-<Project Sdk="Aspire.AppHost.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <AspireUseCliBundle>true</AspireUseCliBundle>
     <AspireCliInvocationMode>DnxPinned</AspireCliInvocationMode>
     <UserSecretsId>ccd9bb33-bfe7-446e-b46c-615468d40829</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\services\Members\Evolve.Members.Api\Evolve.Members.Api.csproj" />
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="Aspire.Hosting.Dotnet" />
   </ItemGroup>
 
 </Project>

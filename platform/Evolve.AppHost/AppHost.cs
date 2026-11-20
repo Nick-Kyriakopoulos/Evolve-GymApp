@@ -1,6 +1,6 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.Evolve_Members_Api>("members-api")
+builder.AddDotnetProject("members-api", "../../services/Members/Evolve.Members.Api/Evolve.Members.Api.csproj")
     .WithHttpEndpoint();
 
 builder.Build().Run();
