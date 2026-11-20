@@ -84,7 +84,6 @@
   * Το νέο dashboard διαφέρει από αυτό της 13.6.5: η προβολή γράφου βρίσκεται πλέον μέσα στο Overview. Τα screenshots της 13.6.5 δεν αντιστοιχούν στο UI που παραδίδεται.
 * **Ανοιχτά σημεία:**
   * **`Aspire.Hosting.Testing` με bundle:** η εφεδρεία του 0007 (`AspireUseCliBundle` `false` με `NoWarn` για το ASPIRE010) **δεν υπάρχει πια** στο C# AppHost. Αν το test με `Aspire.Hosting.Testing` δεν συνεργαστεί με το bundle στο πρώτο service με βάση, χρειάζεται νέα απόφαση.
-  * **`aspire run`** με το νέο AppHost δεν ελέγχθηκε. Ελέγχθηκε μόνο το `dotnet run`.
   * **Patch της 17.0:** υιοθετείται μόλις κυκλοφορήσει, με το κριτήριο του 0007.
 * **Επαλήθευση (20/11/2026):**
   * Aspire CLI 17.0.0 (`17.0.0+2d325b13709752ba6d9a943635c5e2940a2530c0`) και `Aspire.ProjectTemplates` 17.0.0. Η σύγκριση των templates έδωσε τον πίνακα του τμήματος 5.
@@ -93,5 +92,6 @@
   * Προθέρμανση με `dnx --yes aspire.cli@17.0.0 -- --version`: περίπου 3 λεπτά, δημιουργία των `aspire.cli` και `aspire.cli.win-x64` στο NuGet cache.
   * `dotnet build` στη ρίζα: 0 warnings και 0 errors, χωρίς ASPIRE012, ASPIRE013, NU1109 ή ευπάθειες από το NuGet audit.
   * `dotnet clean` του Members Api και στη συνέχεια `dotnet run --project platform\Evolve.AppHost`: το `Evolve.Members.Api.dll` ξαναδημιουργήθηκε 13 δευτερόλεπτα μετά την εκκίνηση. Το Aspire χτίζει μόνο του το project του `AddDotnetProject`.
+  * `aspire run` από τη ρίζα με το CLI του μηχανήματος (17.0.0): βρήκε το AppHost από το `aspire.config.json` (`platform\Evolve.AppHost\Evolve.AppHost.csproj`), dashboard στη θύρα 17039, `members-api` ξεκίνησε με HTTP endpoint.
   * Dashboard (θύρα 17039, από το `launchSettings.json`): `members-api` σε Running, trace `members-api: GET /` με ένα Server span.
   * Commit της αλλαγής: `f871735`.
