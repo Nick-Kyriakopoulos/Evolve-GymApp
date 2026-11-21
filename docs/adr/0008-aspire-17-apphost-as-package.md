@@ -83,7 +83,7 @@
   * **Το όριο των 120 δευτερολέπτων του 0007 παραμένει** (`_AspireCliVersionTimeout` 120000 σε λειτουργία Dnx). Η πρώτη λήψη της 17.0.0 πήρε περίπου 3 λεπτά, άρα η προθέρμανση του README και του CI μένει απαραίτητη.
   * Το νέο dashboard διαφέρει από αυτό της 13.6.5: η προβολή γράφου βρίσκεται πλέον μέσα στο Overview. Τα screenshots της 13.6.5 δεν αντιστοιχούν στο UI που παραδίδεται.
 * **Ανοιχτά σημεία:**
-  * **`Aspire.Hosting.Testing` με bundle:** η εφεδρεία του 0007 (`AspireUseCliBundle` `false` με `NoWarn` για το ASPIRE010) **δεν υπάρχει πια** στο C# AppHost. Αν το test με `Aspire.Hosting.Testing` δεν συνεργαστεί με το bundle στο πρώτο service με βάση, χρειάζεται νέα απόφαση.
+  * ~~**`Aspire.Hosting.Testing` με bundle**~~ **Κλείστηκε στις 21/11/2026** (βλ. Επαλήθευση 21/11/2026): το `Aspire.Hosting.Testing` συνεργάζεται με το AppHost της 17.0 χωρίς εφεδρεία. Μένει να ελεγχθεί ξανά με το πρώτο container resource (PostgreSQL).
   * **Patch της 17.0:** υιοθετείται μόλις κυκλοφορήσει, με το κριτήριο του 0007.
 * **Επαλήθευση (20/11/2026):**
   * Aspire CLI 17.0.0 (`17.0.0+2d325b13709752ba6d9a943635c5e2940a2530c0`) και `Aspire.ProjectTemplates` 17.0.0. Η σύγκριση των templates έδωσε τον πίνακα του τμήματος 5.
@@ -95,3 +95,9 @@
   * `aspire run` από τη ρίζα με το CLI του μηχανήματος (17.0.0): βρήκε το AppHost από το `aspire.config.json` (`platform\Evolve.AppHost\Evolve.AppHost.csproj`), dashboard στη θύρα 17039, `members-api` ξεκίνησε με HTTP endpoint.
   * Dashboard (θύρα 17039, από το `launchSettings.json`): `members-api` σε Running, trace `members-api: GET /` με ένα Server span.
   * Commit της αλλαγής: `f871735`.
+* **Επαλήθευση (21/11/2026), `Aspire.Hosting.Testing` 17.0.0:**
+  * Template `aspire-xunit --xunit-version v3mtp` της 17.0 (στο `aspire-scratch\v17\IntegrationTests`): `Aspire.Hosting.Testing` 17.0.0 και `xunit.v3` 4.0.0, που στην 4.x εξαρτάται από το `xunit.v3.mtp-v2`. Το Evolve κρατά το `xunit.v3.mtp-v2` του ADR 0006 και δεν αντιγράφει τα `UseMicrosoftTestingPlatformRunner` και `TestingPlatformDotnetTestSupport`.
+  * Nuspec του `Aspire.Hosting.Testing`: εξάρτηση από `Aspire.Hosting.AppHost` με `exclude="Build,Analyzers"`. Στο restore του test project εισάγεται μόνο το `Aspire.Hosting.targets` (analyzers). Τα `.props` και `.targets` του `Aspire.Hosting.AppHost` (`AspireUseCliBundle`, ASPIRE013, `DnxPinned`) **δεν** εφαρμόζονται στο test project. Η λογική του bundle τρέχει μόνο στο build του AppHost.
+  * Συνέπεια του ίδιου `exclude`: ο τύπος `Projects.Evolve_AppHost` που δείχνουν το README και το template **δεν δημιουργείται** στο test project (ούτε αρχείο στο `obj` ούτε τύπος στο dll). Απόφαση: `public partial class Program;` στο τέλος του `AppHost.cs` και `DistributedApplicationTestingBuilder.CreateAsync<Program>()`, η υπογραφή που τεκμηριώνουν τα XML docs (*a type in the entry point assembly*). Απορρίφθηκαν: `InternalsVisibleTo` στο AppHost (το AppHost θα γνώριζε με όνομα το test project και θα άνοιγαν όλα τα `internal`), κλάση marker (νέο όνομα χωρίς νόημα, εκτός του γνωστού idiom του `WebApplicationFactory<Program>`), απευθείας `PackageReference` στο `Aspire.Hosting.AppHost` από το test project (τα targets θα αντιμετώπιζαν το test project ως AppHost).
+  * `dotnet build` στη ρίζα με το `tests/Integration/Evolve.Integration.Tests` (ADR 0001): 0 warnings και 0 errors, χωρίς NU1109 ή ASPIRE013.
+  * `dotnet test`: `Members_Api_Accepts_Requests_When_System_Starts` πέρασε σε περίπου 23 δευτερόλεπτα (εκκίνηση του AppHost, αναμονή του `members-api`, `GET /` με 200).
