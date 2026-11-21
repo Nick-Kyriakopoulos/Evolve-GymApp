@@ -19,6 +19,9 @@
     <Project Path="services/Members/Evolve.Members.Domain/Evolve.Members.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/" />
+  <Folder Name="/tests/Integration/">
+    <Project Path="tests/Integration/Evolve.Integration.Tests/Evolve.Integration.Tests.csproj" />
+  </Folder>
   <Folder Name="/tests/Members/">
     <Project Path="tests/Members/Evolve.Members.Domain.Tests/Evolve.Members.Domain.Tests.csproj" />
   </Folder>
